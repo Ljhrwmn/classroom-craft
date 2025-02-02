@@ -13,9 +13,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
+    // Recupera usuário da sessão
     const storedUser = localStorage.getItem("currentUser");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+    }
+
+    // Cria usuário admin se não existir
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    if (users.length === 0) {
+      const adminUser = {
+        id: crypto.randomUUID(),
+        email: "admin@escola.com",
+        password: "admin123",
+        name: "Administrador",
+        role: "admin"
+      };
+      localStorage.setItem("users", JSON.stringify([adminUser]));
+      console.log("Usuário admin criado:", adminUser);
     }
   }, []);
 
@@ -26,16 +41,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
 
     if (!foundUser) {
-      throw new Error("Invalid credentials");
+      throw new Error("Credenciais inválidas");
     }
 
     setUser(foundUser);
     localStorage.setItem("currentUser", JSON.stringify(foundUser));
+    console.log("Login bem sucedido:", foundUser);
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("currentUser");
+    console.log("Logout realizado");
   };
 
   return (
