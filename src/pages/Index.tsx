@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Book, Calculator, Code, Dna, Flask, Globe, History, Languages, Paintbrush, Brain, Running } from "lucide-react";
+import { Book, Calculator, Code, Dna, Beaker, Globe, History, Languages, Paintbrush, Brain, Activity } from "lucide-react";
 
 const getSubjectIcon = (iconName: string) => {
   const icons: { [key: string]: React.ReactNode } = {
@@ -16,13 +16,13 @@ const getSubjectIcon = (iconName: string) => {
     Calculator: <Calculator className="w-5 h-5" />,
     Code: <Code className="w-5 h-5" />,
     Dna: <Dna className="w-5 h-5" />,
-    Flask: <Flask className="w-5 h-5" />,
+    Beaker: <Beaker className="w-5 h-5" />, // Replacing Flask with Beaker
     Globe: <Globe className="w-5 h-5" />,
     History: <History className="w-5 h-5" />,
     Languages: <Languages className="w-5 h-5" />,
     Paintbrush: <Paintbrush className="w-5 h-5" />,
     Brain: <Brain className="w-5 h-5" />,
-    Running: <Running className="w-5 h-5" />,
+    Activity: <Activity className="w-5 h-5" />, // Replacing Running with Activity
   };
   return icons[iconName] || <Book className="w-5 h-5" />;
 };
